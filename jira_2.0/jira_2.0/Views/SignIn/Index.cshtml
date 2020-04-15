@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+    <div class="card mt-4 ml-auto mr-auto" style="box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.3); width:40%;">
+
+        <div class="card-body m-auto text-center">
+            <form method="post" action="@Url.Action("Index", "SignIn")" class="d-flex flex-column align-items-center text-center">
+                @{
+                    if (Session["SignInMessage"] == null)
+                    {
+                        <div></div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            <p>@Session["SignInMessage"]</p>
+                        </div>
+                    }
+                }
+
+                <div class="form-group">
+                    <h3>Sign In</h3>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="UserName" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="Password" placeholder="Password" required>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <span>I don't have an account, <a href="@Url.Action("Index", "SignUp")" style="color:#6ecadc;">Sign Up</a></span>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+

@@ -1,0 +1,74 @@
+﻿@using jira_2._0.Utils;
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @* Header *@
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #6ecadc;">
+        <a class="navbar-brand" href="@Url.Action("Index","Home")">Jira 2.0</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","Home")">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","Home")">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","Home")">Inicio</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav d-flex align-items-center">
+                @{
+                    if (Session["user"] == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","SignIn")">SignIn</a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" style="height: 40px" class="rounded-circle" />
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("LogOut","SignIn")">LogOut</a>
+                        </li>
+                    }
+
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @* Body Content *@
+
+        @RenderBody()
+        <hr />
+
+        @*Footer*@
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
