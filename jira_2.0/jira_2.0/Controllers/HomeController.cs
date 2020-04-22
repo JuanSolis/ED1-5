@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using jira_2._0.Models;
+using jira_2._0.Utils;
 
 namespace jira_2._0.Controllers
 {
@@ -10,21 +12,14 @@ namespace jira_2._0.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (Storage.Instance.hashTable.Count == 0)
+            {
+                Storage.Instance.hashTableInitialization.insertEmptyCells();
+            }
+
+                return View();
+                        
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

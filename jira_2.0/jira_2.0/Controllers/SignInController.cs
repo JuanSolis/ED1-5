@@ -57,8 +57,9 @@ namespace jira_2._0.Controllers
 
         public ActionResult LogOut()
         {
+            userModel emptyUser = new userModel();
             Session.Remove("user");
-            Storage.Instance.currentUser = null;
+            Storage.Instance.currentUser = emptyUser;
             return View("Index");
         }
 

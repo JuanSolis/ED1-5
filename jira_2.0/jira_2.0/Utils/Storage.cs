@@ -21,6 +21,8 @@ namespace jira_2._0.Utils
 
         public userModel currentUser = new userModel();
         public List<userModel> registeredUsers= new List<userModel>();
+        public HashCell hashTableInitialization = new HashCell();
+        public List<HashCell> hashTable = new List<HashCell>();
 
     }
 }
