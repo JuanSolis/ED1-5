@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using jira_2._0.Models;
 using jira_2._0.Utils;
+
 
 namespace jira_2._0.Controllers
 {
@@ -27,7 +29,7 @@ namespace jira_2._0.Controllers
                 string proyectName = collection["ProyectName"];
                 string taskDescripction = collection["TaskDescription"];
                 string priority = collection["Priority"];
-                DateTime date = Convert.ToDateTime(collection["Date"]);
+                string dateString = collection["Date"];
                 int randomNumberForPriority = 0;
         
                 switch (priority)
@@ -59,11 +61,11 @@ namespace jira_2._0.Controllers
 
                 Task taskRegistered = new Task()
                 {
-                    taskTitle = taskTitle,
-                    proyectName = proyectName,
-                    taskDescripction = taskDescripction,
+                    taskTitle = taskTitle.Replace(',',' '),
+                    proyectName = proyectName.Replace(',', ' '),
+                    taskDescripction = taskDescripction.Replace(',', ' '),
                     priority = randomNumberForPriority,
-                    date = date,
+                    date = dateString,
                 };
 
 
@@ -72,6 +74,27 @@ namespace jira_2._0.Controllers
                 if (taskContainer.insert(taskTitle, taskRegistered))
                 {
                     Session.Remove("InsertTask");
+                    string fileName = string.Empty;
+                    string path = string.Empty;
+                    string folder = string.Empty;
+
+
+                    fileName = Path.GetFileName(Storage.Instance.currentUser.name);
+
+                    if (Storage.Instance.currentUser.role == "Developer")
+                    {
+                        folder = "Developers";
+                    }
+                    else
+                    {
+                        folder = "ProductManagers";
+                    }
+
+                    path = Path.Combine(Server.MapPath("~/App_Data/" + folder), fileName + ".csv");
+                    I_O_Manager file = new I_O_Manager(fileName, path);
+                    file.writeInFile(taskRegistered);
+
+
                     return RedirectToAction("Index", "Home");
                 }
                 else

@@ -11,6 +11,6 @@ namespace jira_2._0.Models
         public string proyectName { get; set; }
         public string taskDescripction { get; set; }
         public int priority { get; set; }
-        public DateTime date { get; set; }
+        public string date { get; set; }
     }
 }

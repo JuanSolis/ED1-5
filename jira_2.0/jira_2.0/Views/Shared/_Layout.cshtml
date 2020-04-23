@@ -20,15 +20,34 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index","Home")">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index","Home")">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index","Home")">Inicio</a>
-                </li>
-            </ul>
+                    @{
+                        switch (Storage.Instance.currentUser.role)
+                        {
+                            case "Developer":
+                                {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","UploadTask")">Create a new Task</a>
+                                </li>
+                                }
+                            break;
+
+                            case "ProductManager":
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index","Dashboard")">Dashboard</a>
+                                    </li>
+                                }
+                                break;
+
+                            default:
+                                <li class="nav-item">
+                                </li>
+                                break;
+                        }
+
+                    }
+                    </li>
+                </ul>
 
             <ul class="navbar-nav d-flex align-items-center">
                 @{
