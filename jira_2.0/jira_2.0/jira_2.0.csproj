@@ -129,6 +129,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductManagerController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Controllers\UploadTaskController.cs" />
@@ -136,6 +138,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\HashCell.cs" />
+    <Compile Include="Models\PriorityQueque.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\userModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -378,9 +381,12 @@
     <Content Include="Views\SignIn\Index.cshtml" />
     <Content Include="Views\SignUp\Index.cshtml" />
     <Content Include="Views\UploadTask\Index.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\ProductManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Developers\" />
+    <Folder Include="App_Data\ProductManagers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

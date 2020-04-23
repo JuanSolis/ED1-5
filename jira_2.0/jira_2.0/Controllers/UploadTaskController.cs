@@ -71,65 +71,60 @@ namespace jira_2._0.Controllers
 
                 HashCell taskContainer = new HashCell();
 
-                if (taskContainer.insert(taskTitle, taskRegistered))
+                int numberOfTasks = Storage.Instance.currentUser.scheduledTasks.tasksScheduled();
+
+                if (numberOfTasks <= 10)
                 {
-                    Session.Remove("InsertTask");
-                    string fileName = string.Empty;
-                    string path = string.Empty;
-                    string folder = string.Empty;
+                    Session.Remove(Storage.Instance.currentUser.name + "Tasks");
 
-
-                    fileName = Path.GetFileName(Storage.Instance.currentUser.name);
-
-                    if (Storage.Instance.currentUser.role == "Developer")
+                    if (taskContainer.insert(taskTitle, taskRegistered))
                     {
-                        folder = "Developers";
+                        Session.Remove("InsertTask");
+                        string fileName = string.Empty;
+                        string path = string.Empty;
+                        string folder = string.Empty;
+
+
+                        fileName = Path.GetFileName(Storage.Instance.currentUser.name);
+
+                        if (Storage.Instance.currentUser.role == "Developer")
+                        {
+                            folder = "Developers";
+                        }
+                        else
+                        {
+                            folder = "ProductManagers";
+                        }
+
+                        path = Path.Combine(Server.MapPath("~/App_Data/" + folder), fileName + ".csv");
+                        I_O_Manager file = new I_O_Manager(fileName, path);
+
+                        file.writeInFile(taskRegistered);
+                        Storage.Instance.currentUser.scheduledTasks.Enqueue(taskRegistered);
+
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        folder = "ProductManagers";
+                        Session["InsertTask"] = "Task already exists";
+                        return RedirectToAction("Index");
                     }
-
-                    path = Path.Combine(Server.MapPath("~/App_Data/" + folder), fileName + ".csv");
-                    I_O_Manager file = new I_O_Manager(fileName, path);
-                    file.writeInFile(taskRegistered);
-
-
-                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    Session["InsertTask"] = "Task already exists";
+                    Session[Storage.Instance.currentUser.name + "Tasks"] = "The list of unfinished tasks is complety full";
                     return RedirectToAction("Index");
                 }
+
             }
             catch
             {
                 return View();
             }
-        }
-
-        // GET: UploadTask/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
         }
 
         // POST: UploadTask/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: UploadTask/Delete/5
         public ActionResult Delete(int id)

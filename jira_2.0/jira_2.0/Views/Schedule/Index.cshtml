@@ -1,0 +1,31 @@
+﻿@using jira_2._0.Utils
+@using jira_2._0.Models
+
+@{
+    ViewBag.Title = "Schedule";
+}
+
+
+<div class="container mt-5 mb-5">
+    <h2 class="text-center mb-3">Welcome @Storage.Instance.currentUser.name, these are your scheduled tasks. </h2>
+    @foreach (Task currentTask in Storage.Instance.currentUser.scheduledTasks.IenumPriorityQueque)
+    {
+        if (currentTask.taskTitle.Equals(Storage.Instance.currentUser.scheduledTasks.Peek().taskTitle))
+        {
+            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                <strong>@currentTask.taskTitle</strong> @currentTask.taskDescripction -- @currentTask.proyectName -- @currentTask.date
+                <button type="submit" class="close">
+                    <span aria-hidden="true"><a href="@Url.Action("Dequeue","Schedule")">&times;</a></span>
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                <strong>@currentTask.taskTitle</strong> @currentTask.taskDescripction -- @currentTask.proyectName -- @currentTask.date
+            </div>
+        }
+
+    }
+
+</div>

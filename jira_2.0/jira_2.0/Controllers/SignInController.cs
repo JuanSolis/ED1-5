@@ -59,6 +59,7 @@ namespace jira_2._0.Controllers
         public ActionResult LogOut()
         {
             userModel emptyUser = new userModel();
+            emptyUser.scheduledTasks.priorityQueque.Clear();
             Session.Remove("user");
             Storage.Instance.currentUser = emptyUser;
             return View("Index");

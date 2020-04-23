@@ -28,22 +28,25 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Index","UploadTask")">Create a new Task</a>
                                 </li>
-                                }
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","Schedule")">Schedule</a>
+                                </li>
+                            }
                             break;
 
-                            case "ProductManager":
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="@Url.Action("Index","Dashboard")">Dashboard</a>
-                                    </li>
-                                }
-                                break;
-
-                            default:
+                        case "ProductManager":
+                            {
                                 <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","ProductManager")">Dashboard</a>
                                 </li>
-                                break;
-                        }
+                            }
+                            break;
+
+                        default:
+                            <li class="nav-item">
+                            </li>
+                            break;
+                    }
 
                     }
                     </li>

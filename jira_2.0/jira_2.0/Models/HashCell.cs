@@ -7,13 +7,12 @@ using jira_2._0.Models;
 
 namespace jira_2._0.Models
 {
-    enum cellState
-    {
-        vacio, ocupado, borrado
-    }
-
     public class HashCell
     {
+        public enum cellState
+        {
+            vacio, ocupado, borrado
+        }
         public int hashTableLenght = 50;
         public string key { get; set; }
         public Task taskDetails { get; set; }

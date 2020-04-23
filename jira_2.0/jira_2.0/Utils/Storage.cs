@@ -23,6 +23,6 @@ namespace jira_2._0.Utils
         public List<userModel> registeredUsers= new List<userModel>();
         public HashCell hashTableInitialization = new HashCell();
         public List<HashCell> hashTable = new List<HashCell>();
-
+        
     }
 }

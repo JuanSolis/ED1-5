@@ -12,7 +12,8 @@ namespace jira_2._0.Models
         public string name { get; set; }
         public string password { get; set; }
         public string role { get; set; }
-
+        public PriorityQueque<Task> scheduledTasks = new PriorityQueque<Task>();
+        
         public userModel SignUpUser(string userName, string userPassword, string userRole)
         {
             if (Storage.Instance.registeredUsers.Exists(user => user.name.Equals(userName)))
@@ -40,6 +41,7 @@ namespace jira_2._0.Models
                 return Storage.Instance.registeredUsers.Find(user => user.name.Equals(userName));
             }
         }
+
 
     }
 

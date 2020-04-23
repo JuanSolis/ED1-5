@@ -1,0 +1,21 @@
+﻿@using jira_2._0.Utils
+@using jira_2._0.Models
+
+@{
+    ViewBag.Title = "Schedule";
+}
+
+
+<div class="container mt-5 mb-5">
+    <h2 class="text-center mb-3">Welcome @Storage.Instance.currentUser.name, these are the tasks for your work team. </h2>
+    @foreach (HashCell currentTask in Storage.Instance.hashTable)
+    {
+        if (currentTask.key != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                <strong>@currentTask.key</strong> @currentTask.taskDetails.taskDescripction -- @currentTask.taskDetails.taskDescripction -- @currentTask.taskDetails.date
+            </div>
+        }
+    }
+
+</div>
